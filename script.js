@@ -145,7 +145,9 @@ let newTaskInput = document.querySelector('.new-task-input');
 let addBtn = document.querySelector('.add-btn');
 
 addBtn.onclick = function() {
-
+  if (newTaskInput.value.length < 1) {
+    return;
+  }
   todos.push(
     {
         userId: 1,
