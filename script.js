@@ -145,7 +145,8 @@ let newTaskInput = document.querySelector('.new-task-input');
 let addBtn = document.querySelector('.add-btn');
 
 addBtn.onclick = function() {
-  if (newTaskInput.value.length < 1) {
+  if (newTaskInput.value.trim() === "") {
+    newTaskInput.value = "";
     return;
   }
   todos.push(
