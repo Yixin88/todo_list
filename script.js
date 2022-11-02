@@ -137,29 +137,34 @@ function renderTask(title, completed){
     todoUl.appendChild(todoItem);
   }
 
+function checked() {
+    const checkboxInput = document.querySelectorAll("input[type='checkbox']");
+
+    checkboxInput.forEach((checkbox) => {
+        if (checkbox.checked) {
+            checkbox.parentElement.children[1].style.textDecoration = "line-through";
+            checkbox.parentElement.style.opacity = '0.4';
+        }
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                checkbox.parentElement.children[1].style.textDecoration = "line-through";
+                checkbox.parentElement.style.opacity = '0.4';
+            } else {
+                checkbox.parentElement.children[1].style.textDecoration = "none";
+                checkbox.parentElement.style.opacity = '1';
+            }
+        })
+    })
+}
+
 for(let i = 0; i < todos.length; i++) {
   renderTask(todos[i].title,todos[i].completed )
 }
 
 let newTaskInput = document.querySelector('.new-task-input');
 let addBtn = document.querySelector('.add-btn');
-const checkboxInput = document.querySelectorAll("input[type='checkbox']");
 
-checkboxInput.forEach((checkbox) => {
-    if (checkbox.checked) {
-        checkbox.parentElement.children[1].style.textDecoration = "line-through";
-        checkbox.parentElement.style.opacity = '0.4';
-    }
-    checkbox.addEventListener('change', () => {
-        if (checkbox.checked) {
-            checkbox.parentElement.children[1].style.textDecoration = "line-through";
-            checkbox.parentElement.style.opacity = '0.4';
-        } else {
-            checkbox.parentElement.children[1].style.textDecoration = "none";
-            checkbox.parentElement.style.opacity = '1';
-        }
-    })
-})
+checked();
 
 addBtn.onclick = function() {
   if (newTaskInput.value.trim() === "") {
@@ -176,4 +181,6 @@ addBtn.onclick = function() {
   )
   renderTask(newTaskInput.value, false )
   newTaskInput.value = "";
+  checked();
 }
+
